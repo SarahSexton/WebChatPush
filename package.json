@@ -1,0 +1,27 @@
+{
+  "name": "webchatpush",
+  "version": "1.0.0",
+  "description": "package file",
+  "main": "app.js",
+  "dependencies": {
+    "botbuilder": "^3.7.0",
+    "restify": "^4.3.0"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/doristchen/WebChatPush.git"
+  },
+  "keywords": [
+    "bot"
+  ],
+  "author": "Doris Chen",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/doristchen/WebChatPush/issues"
+  },
+  "homepage": "https://github.com/doristchen/WebChatPush#readme"
+}
