@@ -49,6 +49,13 @@ var connector = new builder.ChatConnector({
 var bot = new builder.UniversalBot(connector);
 server.post('/api/messages', connector.listen());
 
+// Serve the embded HTML chat bot on our index.html page. Users will interact w/ the bot there.
+// Look in the web folder and grab the index.html page
+server.get(/\/?.*/, restify.serveStatic({
+    directory: './web',
+    default: 'index.html'
+}));
+
 //=========================================================
 // Bots Dialogs
 //=========================================================
