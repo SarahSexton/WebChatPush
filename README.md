@@ -6,14 +6,14 @@ This is a sample of code which shows how you can enable push notifications on a 
 - clone this repository
 - run ```npm install``` from command line
 - run it with ```node bot.js```. It will generate the vapidKey.json file
-- copy the public key in the vapidKey.json and paste it in the ```VAPID_PUBLICKEY``` constant
-- create a public https instance of the bot by
+- copy the public key in vapidKey.json and paste it in the ```VAPID_PUBLICKEY``` constant in index.js.
+- create a public https instance of the bot by:
     - deploying it online
-    - making is publicly available from your computer using a tool like [ngrok](https://ngrok.com/)
+    - making it publicly available from your computer using a tool like [ngrok](https://ngrok.com/)
     - modify the ```baseurl``` variable in the service-worker.js file with your public base url (https://something.xyz)
 - create a bot at [http://dev.botframework.com](http://dev.botframework.com) using this public endpoint
 - create environment variable to set your bot ```MICROSOFT_APP_ID``` and ```MICROSOFT_APP_PASSWORD``` secret keys
 - activate the direct line channel on your bot and copy the key it gives you in the ```DIRECTLINE_SECRET``` constant in the index.js file
 - redeploy if needed
 
-You can now browse https://something.xyz/web/index.html and talk to the bot ! :)
+You can now browse https://something.xyz/web/index.html and talk to the bot! :)

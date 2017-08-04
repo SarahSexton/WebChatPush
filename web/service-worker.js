@@ -1,4 +1,4 @@
-var baseurl = " "; //replace that with you website baseurl. you could handle this differently but it was simplier in this sample
+var baseurl = "https://cobrabot.azurewebsites.net"; //replace that with your website baseurl. you could handle this differently, but it was simpler in this sample.
 
 self.addEventListener('push', function (event) {
 

@@ -1,14 +1,14 @@
 (function () {
 
-    const DIRECTLINE_SECRET = ""; //you get that from the direct line channel at dev.botframework.com
-    const VAPID_PUBLICKEY = ""; //you get that from the server, which will generate a vapidKey.json file
+    const DIRECTLINE_SECRET = process.env.DIRECTLINE_SECRET; //you get that from the direct line channel at dev.botframework.com
+    const VAPID_PUBLICKEY = process.env.VAPID_PUBLICKEY; //you get that from the server, which will generate a vapidKey.json file
 
     var startChat = function () {
         let botConnection;
 
         if (getParameterByName("isback") === 'y') {
 
-            //if we are resuming an existing conversation, we get back the conversationid from LocalStorage
+            //If we are resuming an existing conversation, we get back the conversationid from LocalStorage
             botConnection = new DirectLine.DirectLine({
                 secret: DIRECTLINE_SECRET,
                 conversationId: localStorage.getItem("pushsample.botConnection.conversationId"),
@@ -27,17 +27,17 @@
             .filter(s => s === 2) //when the status is 'connected' (2)
             .subscribe(c => {
 
-                //everything is setup in DirectLine, we can create the Chatbot control
+                //everything is set up in DirectLine; we can create the Chatbot control
                 BotChat.App({
                     botConnection: botConnection,
                     user: { id: botConnection.conversationId}, //you could define you own userid here
                     resize: 'detect'
                 }, document.getElementById("bot"));
 
-                //we setup push notifications (including service worker registration)
+                //we set up push notifications (including service worker registration)
                 setupPush((subscriptionInfo) => {
 
-                    //once push notifications are setup, we get the subscription info back in this callback
+                    //once push notifications are set up, we get the subscription info back in this callback.
                     //we use the backchannel to send this info back to the bot using an 'event' activity
                     botConnection
                         .postActivity({
@@ -80,7 +80,7 @@
                             return subscription;
                         }
 
-                        //if the subscription does not exists, we wrap the VAPID public key and create a new one
+                        //if the subscription does not exist, we wrap the VAPID public key and create a new one.
                         //we pass this new once to the next chaind .then function using return
                         const convertedVapidKey = urlBase64ToUint8Array(VAPID_PUBLICKEY);
                         return registration.pushManager.subscribe({

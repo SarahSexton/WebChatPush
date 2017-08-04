@@ -8,8 +8,7 @@ var vapidKeys = {};
 
 if (fs.existsSync(vapidKeyFilePath)) {
     //if the vapid file exists, then we try to parse its content 
-    //to retrieve the public and private key
-    //more tests might be necessary here
+    //to retrieve the public and private key.
     try {
         vapidKeys = JSON.parse(fs.readFileSync(vapidKeyFilePath));
     }
@@ -19,22 +18,22 @@ if (fs.existsSync(vapidKeyFilePath)) {
     }
 }
 else {
-    //if the file did not exists, we use the web-push module to create keys
-    //and store them in the file for future use
-    //you should copy the public key in the index.js file
+    //If the file did not exist, we use the web-push module to create keys
+    //and store them in the file for future use.
+    //You should copy the public key in the index.js file
     vapidKeys = webPush.generateVAPIDKeys();
     fs.writeFileSync(vapidKeyFilePath, JSON.stringify(vapidKeys));
     console.log("No vapid key file found. One was generated. Here is the public key: " + vapidKeys.publicKey);
 }
 
-//here we setup the web-push module for it to be able to
-//send push notification using our public and private keys
+//Here we setup the web-push module for it to be able to
+//send push notifications using our public and private keys:
 webPush.setVapidDetails(
     'mailto:example@yourdomain.org',
     vapidKeys.publicKey,
     vapidKeys.privateKey);
 
-//standard way of creating a rest API for a bot
+//Standard way of creating a REST API for a bot:
 var server = restify.createServer();
 server.use(restify.bodyParser());
 
@@ -54,13 +53,13 @@ server.post('/api/messages', connector.listen());
 // Bots Dialogs
 //=========================================================
 
-//this is a 'dictionary' in which we store every push subscription per user
+//This is a 'dictionary' in which we store every push subscription per user.
 var pushPerUser = [];
 
-//this event handler is looking for every message sent by the bot
-//we look into the dictionary to see if we have push subscription info
-//for this user and we send a push notif with the bot message
-//this will keep send the message to the user through the channel
+//This event handler is looking for every message sent by the bot.
+//We look into the dictionary to see if we have push subscription info
+//for this user, and we send a push notif with the bot message.
+//This will keep sending the message to the user through the channel.
 bot.on("outgoing", function (message) {
     if (pushPerUser && pushPerUser[message.address.user.id]) {
         var pushsub = pushPerUser[message.address.user.id];
@@ -91,7 +90,7 @@ bot.on('conversationUpdate', function (message) {
             if (identity.id === message.address.bot.id) {
                 var reply = new builder.Message()
                     .address(message.address)
-                    .text("Howdy! I am a webchat notficiaton BOT using the [WebChat control](https://github.com/Microsoft/BotFramework-WebChat)! Say **hello** and I will send a message every 5 seconds. If you accepted notifications, you will get one! If you close the tab but leave the browser opened, you will get a notification when I talk. Oh and say **stop** to shut me off :)");
+                    .text("Howdy! I am a webchat notficiaton bot using the WebChat control! Say **hello** and I will send a message every 5 seconds. If you accepted notifications, you will get one! If you close the tab but leave the browser opened, you will get a notification when I talk. Oh, and say **stop** to shut me off :)");
                 bot.send(reply);
             }
         });
@@ -99,10 +98,10 @@ bot.on('conversationUpdate', function (message) {
 });
 
 
-//this part is a very simple way of simulating proactive dialogs
-//we only send a message with a integer that we increment
-//every 5 seconds. this is for push notifications test purposes and should not
-//be use as base to create any real life bot :)
+//This part is a very simple way of simulating proactive dialogs.
+//We only send a message with an integer that we increment every 5 seconds.
+//This is for push notifications test purposes and should not
+//be use as base to create any real life bot. :)
 var loop = false;
 var count = 1;
 bot.dialog('/', function (session) {
@@ -119,7 +118,7 @@ bot.dialog('/', function (session) {
 
 var proactiveEmulation = (session) => {
     if (loop) {
-        session.send(`Hello, I am web push notification! :) (${count++})`);
+        session.send(`Hello, I am a web push notification! :) (${count++})`);
         setTimeout(() => proactiveEmulation(session), 5000);
     }
 };
