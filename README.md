@@ -5,7 +5,7 @@ This is a sample of code which shows how you can enable push notifications on a 
 # How to try the sample
 - clone this repository
 - run ```npm install``` from command line
-- run it with ```node bot.js```. It will generate the vapidKey.json file
+- run it with ```node app.js```. It will generate the vapidKey.json file
 - copy the public key in vapidKey.json and paste it in the ```VAPID_PUBLICKEY``` constant in index.js.
 - create a public https instance of the bot by:
     - deploying it online

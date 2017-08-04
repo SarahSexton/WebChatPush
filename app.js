@@ -37,7 +37,7 @@ webPush.setVapidDetails(
 var server = restify.createServer();
 server.use(restify.bodyParser());
 
-server.listen(process.env.port || process.env.PORT || 3000, function () {
+server.listen(process.env.port || process.env.PORT || 443, function () {
     console.log('%s listening to %s', server.name, server.url);
 });
 
