@@ -16,6 +16,7 @@
     "node-cmd": "^3.0.0",
     "request": "^2.81.0",
     "restify": "^4.3.0",
-    "web-push": "^3.2.2"
+    "web-push": "^3.2.2",
+    "botframework-webchat": "file:/git/BotFramework-WebChat"
   }
 }
