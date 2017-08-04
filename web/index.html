@@ -2,13 +2,26 @@
 <html>
 
 <head>
+    <meta charset="UTF-8" />
     <link rel="manifest" href="manifest.json" />
-    <link href="https://unpkg.com/botframework-webchat/botchat.css" rel="stylesheet" />
-</head>
+    <title>Bot Chat</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+
+        <style>
+            html, body {
+                height: 100%;
+                margin: 0;
+                padding: 0;
+                overflow: hidden;
+            }
+        </style>
+        <link href="css/botchat.css" rel="stylesheet" />
+        <link href="css/botchat-fullwindow.css" rel="stylesheet" />
+</head>     
 
 <body>
     <div id="bot">
-        
+        <!--
         <iframe src='https://webchat.botframework.com/embed/Cobra?s=e60qWZRDaTc.cwA.2c8.HawVI7X6QqOZbFAr1GZdu_QKqY1IkaM0p9A00h4S2XQ'
         style="height: 500px; width: 100%; margin-top: -40px;">
         
@@ -16,11 +29,12 @@
             style="height: 500px; width: 100%; margin-top: -40px;"></iframe>
             
         </iframe>
-        
+        -->
         
     </div>
-    <script src="https://unpkg.com/botframework-directlinejs/directLine.js"></script>
+<!--<script src="https://unpkg.com/botframework-directlinejs/directLine.js"></script> -->
     <script src="https://unpkg.com/botframework-webchat/botchat.js"></script>
+<!--<script src="/botchat.js"></script>-->
     <script>
         BotChat.App({
             directLine: { secret: direct_line_secret },
