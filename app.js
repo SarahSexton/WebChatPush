@@ -97,7 +97,7 @@ bot.on('conversationUpdate', function (message) {
             if (identity.id === message.address.bot.id) {
                 var reply = new builder.Message()
                     .address(message.address)
-                    .text("Howdy! I am a webchat notficiaton bot using the WebChat control! Say **hello** and I will send a message every 5 seconds. If you accepted notifications, you will get one! If you close the tab but leave the browser opened, you will get a notification when I talk. Oh, and say **stop** to shut me off :)");
+                    .text('Greetings, human! I am a webchat notficiaton bot using the WebChat control! Say **"hello"** and I will send a message every 5 seconds. If you accepted notifications, you will get one! If you close the tab but leave the browser opened, you will get a notification when I talk. Oh, and say **"stop"** to shut me off :)');
                 bot.send(reply);
             }
         });
