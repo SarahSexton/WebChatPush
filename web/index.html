@@ -7,9 +7,19 @@
 </head>
 
 <body>
-    <div id="bot"></div>
+    <div id="bot">
+        <iframe src='https://webchat.botframework.com/embed/Cobra?s=e60qWZRDaTc.cwA.2c8.HawVI7X6QqOZbFAr1GZdu_QKqY1IkaM0p9A00h4S2XQ'></iframe>
+    </div>
     <script src="https://unpkg.com/botframework-directlinejs/directLine.js"></script>
     <script src="https://unpkg.com/botframework-webchat/botchat.js"></script>
+    <script>
+        BotChat.App({
+            directLine: { secret: direct_line_secret },
+            user: { id: 'userid' },
+            bot: { id: 'botid' },
+            resize: 'detect'
+        }, document.getElementById("bot"));
+    </script>
     <script src="index.js"></script>
 </body>
 
