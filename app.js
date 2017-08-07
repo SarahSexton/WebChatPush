@@ -104,24 +104,40 @@ bot.on('conversationUpdate', function (message) {
     }
 });
 
-
-//This part is a very simple way of simulating proactive dialogs.
-//We only send a message with an integer that we increment every 5 seconds.
-//This is for push notifications test purposes and should not
-//be use as base to create any real life bot. :)
+// Set up LUIS connection
+var model = 'https://westus.api.cognitive.microsoft.com/luis/v2.0/apps/' + process.env.LUIS_ID + '?subscription-key=' + process.env.LUIS_KEY + '&verbose=true&timezoneOffset=0&q='
+var recognizer = new builder.LuisRecognizer(model)
+var dialog = new builder.IntentDialog({ recognizers: [recognizer] })
+bot.dialog('/', dialog)
+    // =========================================================
+    // LUIS Dialogs
+    // =========================================================
+    .matches('WebNavigate', [
+        function (session) {
+            session.send(`You surf that web!`)
+        }
+    ])
 var loop = false;
 var count = 1;
-bot.dialog('/', function (session) {
-    if (session.message.text === "stop") {
-        session.send("Stopping loop");
-        loop = false;
+dialog.matches('StartLoop', [
+    function (session) {
+        if (!loop) {
+            loop = true;
+            count = 1
+            proactiveEmulation(session);
+        }
     }
-    else if (!loop) {
-        loop = true;
-        count = 1
-        proactiveEmulation(session);
-    }
-});
+])
+    .matches('Stop', [
+        (session, response) => {
+            session.send("Stopping loop.")
+            loop = false;
+        }
+    ])
+    .onDefault((session, results) => {
+        session.send("Sorry, I did't understand that.")
+        session.beginDialog('/', results)
+    })
 
 var proactiveEmulation = (session) => {
     if (loop) {
